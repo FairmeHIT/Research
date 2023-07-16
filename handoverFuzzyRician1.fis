@@ -1,0 +1,84 @@
+[System]
+Name='handover_fuzzy_Rician1'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=1
+NumRules=36
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='V'
+Range=[0 38.8]
+NumMFs=3
+MF1='low':'trimf',[0.4311 8.366 19.28]
+MF2='mid':'trimf',[9.7 18.84 29.22]
+MF3='high':'trimf',[27.77 38.8 38.8]
+
+[Input2]
+Name='rho'
+Range=[0 1]
+NumMFs=3
+MF1='strong':'trimf',[0 0.25 0.55]
+MF2='mid':'trimf',[0.5 0.65 0.88]
+MF3='weak':'trimf',[0.8 0.9 1]
+
+[Input3]
+Name='Gain'
+Range=[-50 20]
+NumMFs=4
+MF1='poor':'trimf',[-50 -30.09 -11.82]
+MF2='good':'trimf',[-14.36 -6.727 0.2727]
+MF3='very_good':'trimf',[-3.329 3.667 10.67]
+MF4='excellent':'trimf',[3.455 10.45 20]
+
+[Output1]
+Name='output1'
+Range=[0 12]
+NumMFs=4
+MF1='very_low':'trimf',[0.159 1.33 2.83]
+MF2='low':'trimf',[2.05 3.05 4.051]
+MF3='avg':'trimf',[3.094 5.365 7.244]
+MF4='high':'trimf',[6.71 9.31746031746032 12]
+
+[Rules]
+1 1 1, 1 (1) : 1
+1 1 2, 1 (1) : 1
+1 1 3, 2 (1) : 1
+1 1 4, 3 (1) : 1
+1 2 1, 2 (1) : 1
+1 2 2, 2 (1) : 1
+1 2 3, 3 (1) : 1
+1 2 4, 4 (1) : 1
+1 3 1, 2 (1) : 1
+1 3 2, 2 (1) : 1
+1 3 3, 3 (1) : 1
+1 3 4, 4 (1) : 1
+2 1 1, 1 (1) : 1
+2 1 2, 2 (1) : 1
+2 1 3, 3 (1) : 1
+2 1 4, 3 (1) : 1
+2 2 1, 2 (1) : 1
+2 2 2, 3 (1) : 1
+2 2 3, 3 (1) : 1
+2 2 4, 3 (1) : 1
+2 3 2, 2 (1) : 1
+2 3 1, 1 (1) : 1
+2 3 3, 2 (1) : 1
+2 3 4, 4 (1) : 1
+3 1 1, 1 (1) : 1
+3 1 2, 2 (1) : 1
+3 1 3, 3 (1) : 1
+3 1 4, 3 (1) : 1
+3 2 1, 1 (1) : 1
+3 2 2, 2 (1) : 1
+3 2 3, 3 (1) : 1
+3 2 4, 3 (1) : 1
+3 3 1, 1 (1) : 1
+3 3 2, 2 (1) : 1
+3 3 3, 3 (1) : 1
+3 3 4, 4 (1) : 1
