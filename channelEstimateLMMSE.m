@@ -37,7 +37,7 @@ J = zeros(size(Omega));
 for l = 1:L 
     %Go through all pilots
     for t = 1:T 
-        %Compute processed pilot signal according to (13) with an additional scaling factor \sqrt{tau_p}
+        %Compute processed pilot signal according to Eq.(13) with an additional scaling factor \sqrt{tau_p}
         yp_t = sqrt(P) * sum(H((l-1)*M+1:l*M,:,t==pIndex),3) + Np(:,:,l,t); 
         %Compute the received pilot signal covariance matrix Psi
         Psi = (P*sum(Omega(:,:,l,t==pIndex),4) + eyeM); 

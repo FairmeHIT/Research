@@ -60,25 +60,25 @@ for l = 1:L
         Psi = (P*sum(Omega(:,:,l,pilotIndex(k)==pilotIndex),4) + eyeN); 
         %Go through all UEs
         for i = 1:K 
-            %Eq.(70)
+            %Eq.(71)
             los_u_1(i,l,k) =  (trace(B_Aging(:,:,l,k)*Omega(:,:,l,i)));  
             %If UE i shares the same pilot with UE k
             if pilotIndex(k) == pilotIndex(i) 
                 %Eq.(43) but using ACF_2 
                 u_l = P * ACF_2_d(i,l,n)*ACF_2_t(k,l,pilotIndex(k))*ACF_2_t(i,l,pilotIndex(k))'; 
-                %Eq.(86)
+                %Eq.(87)
                 los_u_2(i,l,k) =   (u_l) *  (trace(Omega(:,:,l,k)*J(:,:,l,i))); 
                 %a1 and a2 for Eq.(75)
-                %Eq.(78)
+                %Eq.(79)
                 a1 = trace(J(:,:,l,k)*R(:,:,l,i)*J(:,:,l,k)'*(Psi-P*Omega(:,:,l,i))) + ...
                     a_h(:,l,i)'*J(:,:,l,k)'*(Psi-P*Omega(:,:,l,i))*J(:,:,l,k)*a_h(:,l,i);
-                %Eq.(80)
+                %Eq.(81)
                 a2 = P*abs(ACF_2_t(i,l,pilotIndex(i)))^2*( abs(trace(R(:,:,l,i)*J(:,:,l,k)))^2 + ... 
                     2*real(trace(R(:,:,l,i)*J(:,:,l,k))*a_h(:,l,i)'*J(:,:,l,k)'*a_h(:,l,i))) + ...
                     P*trace(Omega(:,:,l,i)*J(:,:,l,k)*Omega(:,:,l,i)*J(:,:,l,k)') ;  
-                %Eq.(85)
+                %Eq.(86)
                 r_1 = abs(ACF_2_t(k,l,pilotIndex(k)))^2*P*(a1 + a2) ; 
-                %for Eq.(72)
+                %for Eq.(73)
                 los_u_1(i,l,k) = los_u_1(i,l,k) + abs(ACF_2_d(i,l,n))^2 *( (r_1) - ...
                     (trace(B_Aging(:,:,l,k)*Omega(:,:,l,i))))  ;
             end 

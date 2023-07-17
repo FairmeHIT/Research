@@ -55,23 +55,23 @@ for l = 1:L
     for UE_i = 1:length(UEs_index) 
         %Extract UE index
         k = UEs_index(UE_i); 
-        %for C_ki^{los-a,(1)}, Eq.(57)
+        %for C_ki^{los-a,(1)}, Eq.(58)
         Nois(l,k) = a_h(:,l,k)'*a_h(:,l,k) + trace(B_Aging(:,:,l,k)); 
         %Compute the received pilot signal covariance matrix Psi
         Psi = (P*sum(R(:,:,l,pIndex(k)==pIndex),4) + eyeM); 
         %Go through all UEs
         for i = 1:K
-            %Eq.(59)
+            %Eq.(60)
             los_a_1(i,l,k) =   trace( (Omega(:,:,l,i)) * (a_h(:,l,k)*a_h(:,l,k)' + B_Aging(:,:,l,k)) ); 
-            %Eq.(65)
+            %Eq.(66)
             los_a_2(i,l,k) = a_h(:,l,k)'*a_h(:,l,i); 
             %If UE i shares the same pilot with UE k
             if pIndex(k) == pIndex(i)  
                 %Eq.(43)
                 rho_l = P * ACF_1_d(k,l,n)'*ACF_1_t(i,l,pIndex(k))'*ACF_1_t(k,l,pIndex(k))*ACF_1_d(i,l,n); 
-                %Nondiagonal element with pilot contamination, Eq.(65)
+                %Nondiagonal element with pilot contamination, Eq.(66)
                 los_a_2(i,l,k) = los_a_2(i,l,k) + (rho_l) * (trace(R(:,:,l,k)*Psi^(-1)*R(:,:,l,i))); 
-                %Diagonal element with pilot contamination, Eq.(64)
+                %Diagonal element with pilot contamination, Eq.(65)
                 los_a_1(i,l,k) = los_a_1(i,l,k) + abs((rho_l) * trace(R(:,:,l,i)*Psi^(-1)*R(:,:,l,k)))^2 ...
                     + 2*real(rho_l*trace(R(:,:,l,i)*Psi^(-1)*R(:,:,l,k)) * a_h(:,l,i)'*a_h(:,l,k) )  ; 
             end
